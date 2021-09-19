@@ -556,20 +556,20 @@ class App{
                         const rate = getRate(type, value);
                         let color = Object.keys(rate)[0];
                         switch(parseInt(color)) {
-                            case 0: color = '白色'; break;
-                            case 1: color = '蓝色'; break;
-                            case 2: color = '紫色'; break;
-                            case 3: color = '橙色'; break;
+                            case 0: color = 'Uncommon'; break;
+                            case 1: color = 'Rare'; break;
+                            case 2: color = 'Epic'; break;
+                            case 3: color = 'Legendary'; break;
                             default: break;
                         }
                         let r = Object.values(rate)[0];
                         switch(parseInt(r)) {
-                            case 1: r = '不变'; break;
-                            case 2: r = '翻倍'; break;
-                            case 3: r = '三倍'; break;
-                            case 4: r = '四倍'; break;
-                            case 5: r = '五倍'; break;
-                            case 6: r = '六倍'; break;
+                            case 1: r = 'unchange'; break;
+                            case 2: r = 'double'; break;
+                            case 3: r = 'trible'; break;
+                            case 4: r = 'Quadruple'; break;
+                            case 5: r = 'Five times'; break;
+                            case 6: r = 'Six times'; break;
                             default: break;
                         }
                         return `抽到${color}概率${r}`;
@@ -577,10 +577,10 @@ class App{
 
                     const { times, achievement, talentRate, eventRate } = this.#life.getTotal();
                     total.append(`
-                        <li class="achvg${getGrade('times', times)}"><span class="achievementtitle">已重开${times}次</span>${formatRate('times', times)}</li>
-                        <li class="achvg${getGrade('achievement', achievement)}"><span class="achievementtitle">成就达成${achievement}个</span>${formatRate('achievement', achievement)}</li>
-                        <li class="achvg${getGrade('eventRate', eventRate)}"><span class="achievementtitle">事件收集率</span>${Math.floor(eventRate * 100)}%</li>
-                        <li class="achvg${getGrade('talentRate', talentRate)}"><span class="achievementtitle">天赋收集率</span>${Math.floor(talentRate * 100)}%</li>
+                        <li class="achvg${getGrade('times', times)}"><span class="achievementtitle">Have Restart${times} times</span>${formatRate('times', times)}</li>
+                        <li class="achvg${getGrade('achievement', achievement)}"><span class="achievementtitle">Achievement unlocked${achievement}个</span>${formatRate('achievement', achievement)}</li>
+                        <li class="achvg${getGrade('eventRate', eventRate)}"><span class="achievementtitle">Event collected</span>${Math.floor(eventRate * 100)}%</li>
+                        <li class="achvg${getGrade('talentRate', talentRate)}"><span class="achievementtitle">Trait collected</span>${Math.floor(talentRate * 100)}%</li>
                     `);
 
                     const achievementsData = this.#life.getAchievements();
@@ -649,9 +649,9 @@ class App{
                 born: contents => {
                     if(contents.length > 0)
                         $('#lifeTrajectory')
-                            .append(`<li><span>初始：</span><span>${
+                            .append(`<li><span>Initial：</span><span>${
                                 contents.map(
-                                    ({source, target}) => `天赋【${source.name}】发动：替换为天赋【${target.name}】`
+                                    ({source, target}) => `Trait 【${source.name}】 activate： replace as【${target.name}】`
                                 ).join('<br>')
                             }</span></li>`);
 
@@ -685,7 +685,7 @@ class App{
                                     this.#selectedExtendTalent = null;
                                     li.removeClass('selected');
                                 } else if(this.#selectedExtendTalent != null) {
-                                    this.hint('只能继承一个天赋');
+                                    this.hint('Can only inherit one trait');
                                     return;
                                 } else {
                                     this.#selectedExtendTalent = talent.id;
@@ -703,20 +703,20 @@ class App{
                     };
 
                     judge.append(`
-                        ${format('颜值', 'CHR')}
-                        ${format('智力', 'INT')}
-                        ${format('体质', 'STR')}
-                        ${format('家境', 'MNY')}
-                        ${format('快乐', 'SPR')}
-                        ${format('享年', 'AGE')}
-                        ${format('总评', 'SUM')}
+                        ${format('Appearance', 'CHR')}
+                        ${format('Intellect', 'INT')}
+                        ${format('Physique', 'STR')}
+                        ${format('Wealth', 'MNY')}
+                        ${format('Happiness', 'SPR')}
+                        ${format('Die at', 'AGE')}
+                        ${format('Comment', 'SUM')}
                     `);
                 }
             },
         }
 
         $$on('achievement', ({name})=>{
-            this.hint(`解锁成就【${name}】`, 'success');
+            this.hint(`Unlock achievement【${name}】`, 'success');
         })
     }
 
