@@ -368,7 +368,7 @@ class App{
                 if(this.#isEnd) return;
                 const trajectory = this.#life.next();
                 const { age, content, isEnd } = trajectory;
-                const li = $(`<li><span>${age}：</span><span>${
+                const li = $(`<li><span>age ${age}：</span><span>${
                     content.map(
                         ({type, description, grade, name, postEvent}) => {
                             switch(type) {
@@ -395,8 +395,8 @@ class App{
                 <li><span>Appearance</span><span>${property.CHR}</span></li>
                 <li><span>Intellect</span><span>${property.INT}</span></li>
                 <li><span>Physique</span><span>${property.STR}</span></li>
-                <li><span>家境</span><span>${property.MNY}</span></li>
-                <li><span>快乐</span><span>${property.SPR}</span></li>
+                <li><span>Wealth</span><span>${property.MNY}</span></li>
+                <li><span>Happiness</span><span>${property.SPR}</span></li>
                 `);
             });
         // html2canvas
@@ -461,20 +461,20 @@ class App{
         // Summary
         const summaryPage = $(`
         <div id="main">
-            <div class="head">人生总结</div>
+            <div class="head">Life summary</div>
             <ul id="judge" class="judge">
-                <li class="grade2"><span>颜值：</span><span>9级 美若天仙</span></li>
-                <li class="grade0"><span>智力：</span><span>4级 智力一般</span></li>
-                <li class="grade0"><span>体质：</span><span>1级 极度虚弱</span></li>
-                <li class="grade0"><span>家境：</span><span>6级 小康之家</span></li>
-                <li class="grade0"><span>享年：</span><span>3岁 早夭</span></li>
-                <li class="grade0"><span>快乐：</span><span></span>3级 不太幸福的人生</li>
+                <li class="grade2"><span>Appearance：</span><span>9级 美若天仙</span></li>
+                <li class="grade0"><span>Intellect：</span><span>4级 智力一般</span></li>
+                <li class="grade0"><span>Physique：</span><span>1级 极度虚弱</span></li>
+                <li class="grade0"><span>Wealth：</span><span>6级 小康之家</span></li>
+                <li class="grade0"><span>Die at：</span><span>3岁 早夭</span></li>
+                <li class="grade0"><span>Happiness：</span><span></span>3级 不太幸福的人生</li>
             </ul>
-            <div class="head" style="height:auto;">天赋，你可以选一个，下辈子还能抽到</div>
+            <div class="head" style="height:auto;">Select one trait that you can keep</div>
             <ul id="talents" class="selectlist" style="flex: 0 1 auto;">
-                <li class="grade2b">黑幕（面试一定成功）</li>
+                <li class="grade2b">Shady(interview must be successful)</li>
             </ul>
-            <button id="again" class="mainbtn"><span class="iconfont">&#xe6a7;</span>再次重开</button>
+            <button id="again" class="mainbtn"><span class="iconfont">&#xe6a7;</span>Restart again</button>
         </div>
         `);
 
