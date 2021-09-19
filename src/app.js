@@ -265,7 +265,7 @@ class App{
             }
             btnAdd.click(()=>{
                 if(total() >= this.#totalMax) {
-                    this.hint('没有可分配的点数了');
+                    this.hint('No more attribute points');
                     return;
                 }
                 set(get()+1);
@@ -286,10 +286,10 @@ class App{
             return {group, get, set};
         }
 
-        groups.CHR = getBtnGroups("颜值", 0, 10); // 颜值 charm CHR
-        groups.INT = getBtnGroups("智力", 0, 10); // 智力 intelligence INT
-        groups.STR = getBtnGroups("体质", 0, 10); // 体质 strength STR
-        groups.MNY = getBtnGroups("家境", 0, 10); // 家境 money MNY
+        groups.CHR = getBtnGroups("Appearance", 0, 10); // 颜值 charm CHR
+        groups.INT = getBtnGroups("Intellect", 0, 10); // 智力 intelligence INT
+        groups.STR = getBtnGroups("Physique", 0, 10); // 体质 strength STR
+        groups.MNY = getBtnGroups("Wealth", 0, 10); // 家境 money MNY
 
         const ul = propertyPage.find('#propertyAllocation');
 
@@ -351,10 +351,10 @@ class App{
             <ul id="lifeProperty" class="lifeProperty"></ul>
             <ul id="lifeTrajectory" class="lifeTrajectory"></ul>
             <div class="btn-area">
-                <button id="auto" class="mainbtn">自动播放</button>
-                <button id="auto2x" class="mainbtn">自动播放2x</button>
-                <button id="summary" class="mainbtn">人生总结</button>
-                <button id="domToImage" class="mainbtn">人生回放</button>
+                <button id="auto" class="mainbtn">Autoplay</button>
+                <button id="auto2x" class="mainbtn">Autoplay 2x</button>
+                <button id="summary" class="mainbtn">Life Summary</button>
+                <button id="domToImage" class="mainbtn">Replay</button>
             </div>
             <div class="domToImage2wx">
                 <img src="" id="endImage" />
@@ -368,12 +368,12 @@ class App{
                 if(this.#isEnd) return;
                 const trajectory = this.#life.next();
                 const { age, content, isEnd } = trajectory;
-                const li = $(`<li><span>${age}岁：</span><span>${
+                const li = age $(`<li><span>${age}：</span><span>${
                     content.map(
                         ({type, description, grade, name, postEvent}) => {
                             switch(type) {
                                 case 'TLT':
-                                    return `天赋【${name}】发动：${description}`;
+                                    return `trait 【${name}】 activate：${description}`;
                                 case 'EVT':
                                     return description + (postEvent?`<br>${postEvent}`:'');
                             }
