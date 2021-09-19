@@ -67,8 +67,8 @@ class App {
         this.#talentExtend = localStorage.talentExtend;
         await this.#life.initial();
         this.output(`\rLoading Complete.
-人生重开模拟器
-这垃圾人生一秒也不想待了
+Simulate for Life
+Tested for Lab 5
 \n🎉键入 \x1B[4m/remake\x1B[24m 开始游戏`,
             true
         );
