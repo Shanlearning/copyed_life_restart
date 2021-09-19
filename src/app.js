@@ -55,8 +55,8 @@ class App{
         // Index
         const indexPage = $(`
         <div id="main">
-            <button id="achievement">Achievements</button>
-            <button id="specialthanks">Special Thanks</button>
+            <button id="achievement">Score</button>
+            <button id="specialthanks">Thanks</button>
             <button id="themeToggleBtn">Black</button>
             <div id="title">
                 Life Simulator<br>
@@ -138,7 +138,7 @@ class App{
         // Talent
         const talentPage = $(`
         <div id="main">
-            <div class="head" style="font-size: 1.6rem">Talent draw</div>
+            <div class="head" style="font-size: 1.6rem">Select Traits</div>
             <button id="random" class="mainbtn" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);"">10 consecutive draws!</button>
             <ul id="talents" class="selectlist"></ul>
             <button id="next" class="mainbtn">please select 3</button>
@@ -199,7 +199,7 @@ class App{
             .find('#next')
             .click(()=>{
                 if(this.#talentSelected.size!=3) {
-                    this.hint('please select 3 talents');
+                    this.hint('please select 3 traits');
                     return;
                 }
                 talentPage.find('#next').hide()
@@ -212,21 +212,21 @@ class App{
         const propertyPage = $(/*html*/`
         <div id="main">
             <div class="head" style="font-size: 1.6rem">
-                <div>调整初始属性</div>
-                <div id="total" style="font-size:1rem; font-weight:normal;">可用属性点：0</div>
+                <div>Adjust for Initial Attributes</div>
+                <div id="total" style="font-size:1rem; font-weight:normal;">Available attribute points：0</div>
             </div>
             <ul id="propertyAllocation" class="propinitial"></ul>
             <ul class="selectlist" id="talentSelectedView"></ul>
             <div class="btn-area">
-                <button id="random" class="mainbtn">随机分配</button>
-                <button id="start" class="mainbtn">开始新人生</button>
+                <button id="random" class="mainbtn">Randomly Distribute</button>
+                <button id="start" class="mainbtn">Start Your New Life</button>
             </div>
         </div>
         `);
         propertyPage.mounted = ()=>{
             propertyPage
             .find('#talentSelectedView').append(
-                `<li>已选天赋</li>` +
+                `<li>Selected traits</li>` +
                 Array.from(this.#talentSelected)
                 .map(({name,description})=>`<li class="grade0b">${name}(${description})</li>`)
                 .join('')
@@ -240,7 +240,7 @@ class App{
             return t;
         }
         const freshTotal = ()=>{
-            propertyPage.find('#total').text(`可用属性点：${this.#totalMax - total()}`);
+            propertyPage.find('#total').text(`Available attribute points：${this.#totalMax - total()}`);
         }
         const getBtnGroups = (name, min, max)=>{
             const group = $(`<li>${name}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>`);
@@ -322,10 +322,10 @@ class App{
             .find('#start')
             .click(()=>{
                 if(total() < this.#totalMax) {
-                    this.hint(`你还有${this.#totalMax-total()}属性点没有分配完`);
+                    this.hint(`You still have ${this.#totalMax-total()} attribute points unused`);
                     return;
                 } else if (total() > this.#totalMax) {
-                    this.hint(`你多使用了${total() - this.#totalMax}属性点`);
+                    this.hint(`You used ${total() - this.#totalMax} attribute points exceeded`);
                     return;
                 }
                 const contents = this.#life.restart({
