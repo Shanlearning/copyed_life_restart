@@ -392,9 +392,9 @@ class App{
                 }
                 const property = this.#life.getLastRecord();
                 $("#lifeProperty").html(`
-                <li><span>颜值</span><span>${property.CHR}</span></li>
-                <li><span>智力</span><span>${property.INT}</span></li>
-                <li><span>体质</span><span>${property.STR}</span></li>
+                <li><span>Appearance</span><span>${property.CHR}</span></li>
+                <li><span>Intellect</span><span>${property.INT}</span></li>
+                <li><span>Physique</span><span>${property.STR}</span></li>
                 <li><span>家境</span><span>${property.MNY}</span></li>
                 <li><span>快乐</span><span>${property.SPR}</span></li>
                 `);
