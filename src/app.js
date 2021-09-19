@@ -368,7 +368,7 @@ class App{
                 if(this.#isEnd) return;
                 const trajectory = this.#life.next();
                 const { age, content, isEnd } = trajectory;
-                const li = age $(`<li><span>${age}：</span><span>${
+                const li = $(`<li><span>${age}：</span><span>${
                     content.map(
                         ({type, description, grade, name, postEvent}) => {
                             switch(type) {
