@@ -325,7 +325,7 @@ class App{
                     this.hint(`You still have ${this.#totalMax-total()} attribute points unused`);
                     return;
                 } else if (total() > this.#totalMax) {
-                    this.hint(`You used ${total() - this.#totalMax} attribute points exceeded`);
+                    this.hint(`You got ${total() - this.#totalMax} attribute points exceeded`);
                     return;
                 }
                 const contents = this.#life.restart({
