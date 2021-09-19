@@ -69,12 +69,12 @@ class App {
         this.output(`\rLoading Complete.
 Simulate for Life
 Tested for Lab 5
-\n🎉键入 \x1B[4m/remake\x1B[24m 开始游戏`,
+\n🎉input \x1B[4m/remake\x1B[24m start game`,
             true
         );
         $$on('achievement', ({name})=>this.output(`
 -------------------------
-    解锁成就【${name}】
+    Unlock achievement【${name}】
 -------------------------
 `))
     }
@@ -341,10 +341,10 @@ Tested for Lab 5
         const warn = str => `${this.list()}\n${this.style('warn', str)}`;
         for(const number of select) {
             const s = this.#randomTalents[number];
-            if(!s) return warn(`${number} 为未知天赋`);
+            if(!s) return warn(`${number} is unknown trait`);
             if(this.#talentSelected.has(s)) continue;
             if(this.#talentSelected.size == 3)
-                return warn('⚠只能选3个天赋');
+                return warn('⚠can only choose three traits');
 
             const exclusive = this.#life.exclusive(
                 Array.from(this.#talentSelected).map(({id})=>id),
@@ -354,7 +354,7 @@ Tested for Lab 5
             if(exclusive != null)
                 for(const { name, id } of this.#talentSelected)
                     if(id == exclusive)
-                        return warn(`天赋【${s.name}】与已选择的天赋【${name}】冲突`);
+                        return warn(`Triat 【${s.name}】 conflict with 【${name}】`);
 
             this.#talentSelected.add(s);
         }
@@ -376,7 +376,7 @@ Tested for Lab 5
         const warn = str => `${this.list()}\n${this.style('warn', str)}`;
         const list = Array.from(this.#talentSelected);
         const s = list[select];
-        if(!s) return warn(`${select} 为未知天赋`);
+        if(!s) return warn(`${select} is unknown trait`);
         this.#talentExtend = s.id;
         return this.list();
     }
@@ -389,12 +389,12 @@ Tested for Lab 5
         let description, list, check;
         switch(this.#step) {
             case this.Steps.TALENT:
-                description = '🎉 请选择3个天赋';
+                description = '🎉 please choose 3 traits';
                 list = this.#randomTalents;
                 check = talent=>this.#talentSelected.has(talent);
                 break;
             case this.Steps.SUMMARY:
-                description = '🎉 你可以选一个天赋继承';
+                description = '🎉 You can inherit one trait';
                 list = Array.from(this.#talentSelected);
                 check = ({id})=>this.#talentExtend == id;
                 break;
@@ -416,7 +416,7 @@ Tested for Lab 5
         const warn = (a, b) => `${a}\n${this.style('warn', this.style('warn', b))}`;
         switch(this.#step) {
             case this.Steps.TALENT:
-                if(this.#talentSelected.size != 3) return warn(this.list(), `⚠请选择3个天赋`);
+                if(this.#talentSelected.size != 3) return warn(this.list(), `⚠please choose 3 traits`);
                 this.#step = this.Steps.PROPERTY;
                 this.#propertyAllocation.total = 20 + this.#life.getTalentAllocationAddition(
                     Array.from(this.#talentSelected).map(({id})=>id)
@@ -425,7 +425,7 @@ Tested for Lab 5
                 return this.prop();
             case this.Steps.PROPERTY:
                 const less = this.less();
-                if(less > 0) return warn(this.prop(), `你还有${less}属性点没有分配完`);
+                if(less > 0) return warn(this.prop(), `You still got ${less} attribute points`);
                 this.#step = this.Steps.TRAJECTORY;
                 delete this.#propertyAllocation.total;
                 this.#life.restart(this.#propertyAllocation);
@@ -473,7 +473,7 @@ Tested for Lab 5
                 ({type, description, grade, name, postEvent}) => {
                     switch(type) {
                         case 'TLT':
-                            return `天赋【${name}】发动：${description}`;
+                            return `trait 【${name}】 activate：${description}`;
                         case 'EVT':
                             return description + (postEvent?`\n\t${postEvent}`:'');
                     }
@@ -484,14 +484,14 @@ Tested for Lab 5
 
     prop() {
         const { CHR, INT, STR, MNY } = this.#propertyAllocation;
-        return `🎉属性分配
-剩余点数 ${this.less()}
+        return `🎉Attribute assign
+Lefted ${this.less()}
 
-属性(TAG)       当前值
-颜值(CHR)         ${CHR}
-智力(INT)         ${INT}
-体质(STR)         ${STR}
-家境(MNY)         ${MNY}
+Attribute(TAG)       Current
+Appearance(CHR)         ${CHR}
+Intellect(INT)         ${INT}
+Physique(STR)         ${STR}
+Wealth(MNY)         ${MNY}
         `
     }
 
@@ -502,11 +502,11 @@ Tested for Lab 5
 
     alloc(tag, value) {
         const warn = str => `${this.prop()}\n${this.style('warn', str)}`
-        if(!value) return warn('⚠ 分配的数值没有给定');
+        if(!value) return warn('⚠ The assigned value is not given');
         const isSet = !(value[0] == '-'|| value[0] == '+');
 
         value = Number(value);
-        if(isNaN(value)) return warn('⚠ 分配的数值不正确');
+        if(isNaN(value)) return warn('⚠ Incorrect value assigned');
 
         switch(tag) {
             case 'c':
@@ -534,19 +534,19 @@ Tested for Lab 5
                 const tempLess = this.less() - value;
                 const tempSet = this.#propertyAllocation[tag] + value;
 
-                if(tempLess<0) return  warn('⚠ 你没有更多的点数可以分配了');
+                if(tempLess<0) return  warn('⚠ You have no more points to allocate');
                 if(
                     tempLess>this.#propertyAllocation.total
                     || tempSet < 0
-                ) return  warn('⚠ 不能分配负数属性');
-                if(tempSet>10) return  warn('⚠ 单项属性最高分配10点');
+                ) return  warn('⚠ Cannot assign negative attributes');
+                if(tempSet>10) return  warn('⚠ Up to 10 points can be allocated for a single attribute');
 
                 this.#propertyAllocation[tag] += value;
 
                 return this.prop();
 
             default:
-                return  warn('⚠ 未知的tag');
+                return  warn('⚠ Unknown tag');
         }
     }
 
@@ -580,13 +580,13 @@ Tested for Lab 5
 
         return [
             '🎉 总评',
-            format('颜值', 'CHR'),
-            format('智力', 'INT'),
-            format('体质', 'STR'),
-            format('家境', 'MNY'),
-            format('快乐', 'SPR'),
-            format('享年', 'AGE'),
-            format('总评', 'SUM'),
+            format('Appearance', 'CHR'),
+            format('Intellect', 'INT'),
+            format('Physique', 'STR'),
+            format('Wealth', 'MNY'),
+            format('Happiness', 'SPR'),
+            format('Die at', 'AGE'),
+            format('Summary', 'SUM'),
         ].join('\n');
     }
 }
