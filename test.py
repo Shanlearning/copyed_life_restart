@@ -9,7 +9,38 @@ import json
 
 _dat = json.loads(open('data\\age.json').read())
 
-_dat = json.loads(open('events.json',encoding="utf-8").read())
+_dat = json.loads(open('data\\events.json',encoding="utf-8").read())
+
+
+import re
+
+for item in _dat:
+    if "United States" in _dat[item]['event']:
+        print(_dat[item]['event'])
+        print(item)
+
+
+_dat["11444"]['event'] = 'The minister of education has postponed the entry age for elementary school to 7-9 years old.'
+
+
+for item in _dat:
+    if "postEvent" in _dat[item]:
+        if "US" in _dat[item]['postEvent']:
+            print(_dat[item]['event'])
+            print(item)
+
+[_dat[item]['event'] for item in _dat]
+
+
+
+
+
+list(_dat.keys())
+
+
+_dat
+
+
 
 from googletrans import Translator
 
@@ -20,10 +51,7 @@ import time
 translator = Translator(service_urls=['translate.googleapis.com'])
 
 
-_dat[list(_dat.keys())[182]]['event']
-list(_dat.keys())[182:][0]
-
-for item in tqdm(list(_dat.keys())[182:]):
+for item in tqdm(list(_dat.keys())):
     result = translator.translate(_dat[item]['event'])    
     _dat[item]['event'] = result.text
     print(result.text)
@@ -39,16 +67,6 @@ from google.cloud import translate
 sample_text = "Hello world!"
 target_language_code = "en"
 
-
-_dat
-
-for item in tqdm(list(_dat.keys())[182:]):
-    _dat[list(_dat.keys())[182]]['event']
-
-list(_dat.keys())[182:][0]
-
-for item in list(_dat.keys())[182:1000]:
-    
 
 [_dat[item]['event'] for item in list(_dat.keys())[182:1000]],
 

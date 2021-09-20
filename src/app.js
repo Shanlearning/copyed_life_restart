@@ -577,8 +577,8 @@ class App{
 
                     const { times, achievement, talentRate, eventRate } = this.#life.getTotal();
                     total.append(`
-                        <li class="achvg${getGrade('times', times)}"><span class="achievementtitle">Have Restart${times} times</span>${formatRate('times', times)}</li>
-                        <li class="achvg${getGrade('achievement', achievement)}"><span class="achievementtitle">Achievement unlocked${achievement}个</span>${formatRate('achievement', achievement)}</li>
+                        <li class="achvg${getGrade('times', times)}"><span class="achievementtitle">Have Restart ${times} times</span>${formatRate('times', times)}</li>
+                        <li class="achvg${getGrade('achievement', achievement)}"><span class="achievementtitle">Number of achievement unlocked ${achievement}</span>${formatRate('achievement', achievement)}</li>
                         <li class="achvg${getGrade('eventRate', eventRate)}"><span class="achievementtitle">Event collected</span>${Math.floor(eventRate * 100)}%</li>
                         <li class="achvg${getGrade('talentRate', talentRate)}"><span class="achievementtitle">Trait collected</span>${Math.floor(talentRate * 100)}%</li>
                     `);
