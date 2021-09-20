@@ -15,16 +15,18 @@ _dat = json.loads(open('data\\events.json',encoding="utf-8").read())
 import re
 
 for item in _dat:
-    if "United States" in _dat[item]['event']:
+    if "America" in _dat[item]['event']:
         print(_dat[item]['event'])
         print(item)
 
 
-_dat["11444"]['event'] = 'The minister of education has postponed the entry age for elementary school to 7-9 years old.'
+_dat["10702"]['event'] = 'The establishment of universal scoring standards for film and television music by elites has caused widespread controversy.'
 
 
 for item in _dat:
     if "postEvent" in _dat[item]:
+            print(_dat[item]['event'])
+
         if "US" in _dat[item]['postEvent']:
             print(_dat[item]['event'])
             print(item)
