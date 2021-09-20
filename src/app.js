@@ -572,7 +572,7 @@ class App{
                             case 6: r = 'Six times'; break;
                             default: break;
                         }
-                        return `抽到${color}概率${r}`;
+                        return `chance of getting ${color} ${r}`;
                     }
 
                     const { times, achievement, talentRate, eventRate } = this.#life.getTotal();
